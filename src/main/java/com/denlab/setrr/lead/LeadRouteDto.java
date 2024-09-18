@@ -7,6 +7,10 @@ import lombok.Data;
 @Builder
 public class LeadRouteDto {
 
+    private Long id;
     private String setterName;
+    private String proposedGrade;
+    private String anchorName;
+    private String setType;
 
 }
