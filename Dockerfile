@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 # The application's jar file
 ARG JAR_FILE=build/libs/*.jar
