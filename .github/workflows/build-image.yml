@@ -31,5 +31,5 @@ jobs:
     - name: Build & Tag the Docker image
       run: docker build . --file Dockerfile --tag $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
 
-    - name: Push Docker $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
+    - name: Push Docker Image # $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
       run: docker push --tag $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
