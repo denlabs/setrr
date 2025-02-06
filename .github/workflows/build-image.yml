@@ -49,3 +49,11 @@ jobs:
 
       - name: Push Docker Image 
         run: docker push ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
+
+      - name: Set Kubernetes context
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          
+      - name: Apply Kubernetes deployment
+        run: |
+          kubectl apply -f k8s/deployment.yml
