@@ -50,6 +50,11 @@ jobs:
       - name: Push Docker Image 
         run: docker push ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
 
+      - name: Set up kubectl
+        uses: actions/setup-kubectl@v3
+        with:
+          version: 'latest'  # You can specify a specific version if needed
+          
       - name: Set Kubernetes context
         run: |
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
