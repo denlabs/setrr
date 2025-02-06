@@ -29,8 +29,8 @@ repositories {
 
 task printVersionName {
     doLast {
-	println project.ext.version_name
-        // println project.version
+	// println project.ext.version_name
+        println project.version
     }
 }
 
