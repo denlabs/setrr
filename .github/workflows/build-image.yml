@@ -47,4 +47,4 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
 
       - name: Push Docker Image # ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
-        run: docker push --tag ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
+        run: docker push ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
