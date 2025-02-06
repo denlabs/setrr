@@ -23,6 +23,13 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
+          distribution: 'temurin' # or any other distribution you prefer
+          java-package: jdk
+          # check-latest: false
+          # server-id: github
+          # server-username: ${{ secrets.GITHUB_ACTOR }}
+          # server-password: ${{ secrets.GITHUB_TOKEN }}
+          # overwrite-settings: true
 
       - name: Build with Gradle
         run: ./gradlew clean build -x test
