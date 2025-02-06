@@ -43,8 +43,8 @@ jobs:
       - name: Use version name
         run: echo "The version name is ${{ env.VERSION_NAME }}"
         
-      - name: Build & Tag the Docker image for ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
-        run: docker build . --file Dockerfile --tag ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
+      - name: Build & Tag the Docker image for ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
+        run: docker build . --file Dockerfile --tag ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
 
       - name: Push Docker Image # ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
-        run: docker push --tag ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
+        run: docker push --tag ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
