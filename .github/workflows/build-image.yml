@@ -15,21 +15,29 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Retrieve Version
-      run: |
-       echo "::setOutput name=VERSION_NAME::$(${{github.workspace}}/gradlew -q printVersionName)"
-      id: build_version
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Get version
-      run: | 
-        echo "version_name=${{steps.build_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
-    
-    - name: Build & Tag the Docker image
-      run: docker build . --file Dockerfile --tag $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
 
-    - name: Push Docker Image # $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
-      run: docker push --tag $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
+      - name: Build with Gradle
+        run: ./gradlew clean build -x test
+
+      - name: Capture version name
+        id: capture_version
+        run: |
+          VERSION_NAME=$(./gradlew printVersionName -q)
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+
+      - name: Use version name
+        run: echo "The version name is ${{ env.VERSION_NAME }}"
+        
+      - name: Build & Tag the Docker image for $REPOSITORY_NAME/$APP_NAME:${{ env.VERSION_NAME }}
+        run: docker build . --file Dockerfile --tag $REPOSITORY_NAME/$APP_NAME:${{ env.VERSION_NAME }}
+
+      - name: Push Docker Image # $REPOSITORY_NAME/$APP_NAME:${{env.version_name}}
+        run: docker push --tag $REPOSITORY_NAME/$APP_NAME:${{ env.VERSION_NAME }}
