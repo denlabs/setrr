@@ -25,12 +25,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin' # or any other distribution you prefer
           java-package: jdk
-          # check-latest: false
-          # server-id: github
-          # server-username: ${{ secrets.GITHUB_ACTOR }}
-          # server-password: ${{ secrets.GITHUB_TOKEN }}
-          # overwrite-settings: true
-
+          
       - name: Build with Gradle
         run: ./gradlew clean build -x test
 
@@ -43,7 +38,7 @@ jobs:
       - name: Use version name
         run: echo "The version name is ${{ env.VERSION_NAME }}"
         
-      - name: Build & Tag the Docker image for ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
+      - name: Build & Tag the Docker image
         run: docker build . --file Dockerfile --tag ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
 
       - name: Log in to Docker Hub
@@ -52,5 +47,5 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Docker Image # ${{ env.REPOSITORY_NAME }}/${{ env.$APP_NAME }}:${{ env.VERSION_NAME }}
+      - name: Push Docker Image 
         run: docker push ${{ env.REPOSITORY_NAME }}/${{ env.APP_NAME }}:${{ env.VERSION_NAME }}
