@@ -56,7 +56,7 @@ jobs:
           version: 'latest'  # You can specify a specific version if needed
 
       - name: Use context name
-        run: echo "${{ secrets.KUBECONFIG }}"
+        run: echo ${{ secrets.KUBECONFIG }}
         
       - name: Set Kubernetes context
         run: |
