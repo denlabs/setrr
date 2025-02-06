@@ -54,7 +54,10 @@ jobs:
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'  # You can specify a specific version if needed
-          
+
+      - name: Use context name
+        run: echo "${{ secrets.KUBECONFIG }}"
+        
       - name: Set Kubernetes context
         run: |
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
