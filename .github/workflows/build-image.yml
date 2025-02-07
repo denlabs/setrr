@@ -1,5 +1,6 @@
 name: Build, Deploy, Apply to do-tor1-faith-no-more-v1
 
+
 env:
   APP_NAME: setrr
   REPOSITORY_NAME: denislabelle
@@ -15,8 +16,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
     steps:
-
+    
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -59,15 +61,7 @@ jobs:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: 'latest'  # You can specify a specific version if needed
-        
-      # - name: Configure Kubernetes credentials
-      #   run: |
-      #     echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
-      #     export KUBECONFIG=kubeconfig.yaml
-      #     mkdir $HOME/.kube
-      #     cp kubeconfig.yaml $HOME/.kube/config
-          
+          version: 'latest'  # You can specify a specific version if needed          
         
       - name: Set Kubernetes context
         run: |
