@@ -23,13 +23,8 @@ repositories {
 	mavenCentral()
 }
 
-// tasks.named('printVersionName') {
-// 	println project.ext.version_name
-// }
-
 task printVersionName {
     doLast {
-	// println project.ext.version_name
         println project.version
     }
 }
@@ -59,8 +54,4 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-tasks.named('printVersionName') {
-	println project.ext.version_name
 }
