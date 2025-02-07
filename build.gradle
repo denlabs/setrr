@@ -23,6 +23,17 @@ repositories {
 	mavenCentral()
 }
 
+// tasks.named('printVersionName') {
+// 	println project.ext.version_name
+// }
+
+task printVersionName {
+    doLast {
+	// println project.ext.version_name
+        println project.version
+    }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
