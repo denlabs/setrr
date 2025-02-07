@@ -80,14 +80,15 @@ jobs:
       #     echo "$(cat $HOME/.kube/config)"
 
       - name: Echo Contexts
+        id: step_one
         run: |
           {
             echo 'CONTEXTS<<EOF'
             kubectl config current-context
             echo EOF
           } >> "$GITHUB_ENV"
-      - name: Apply Kubernetes deployment
-        run: kubectl config use-context do-tor1-faith-no-more-v1
+      # - name: Apply Kubernetes deployment
+      #   run: kubectl config use-context do-tor1-faith-no-more-v1
     #      # kubectl config get-contexts
           
     #      # kubectl apply -f k8s/deployment.yaml --validate=false
