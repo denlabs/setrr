@@ -70,9 +70,9 @@ jobs:
           mkdir $HOME/.kube
           cp kubeconfig.yaml $HOME/.kube/config
         
-      - name: Set Kubernetes context
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+      # - name: Set Kubernetes context
+      #   run: |
+      #     echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
       #   Just for testing 
       # - name: output Kubernetes deployment    
