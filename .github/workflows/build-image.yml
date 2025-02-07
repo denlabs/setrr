@@ -71,6 +71,7 @@ jobs:
         
       - name: Set Kubernetes context
         run: |
+          mkdir $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
 
       - name: Apply Kubernetes deployment
