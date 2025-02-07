@@ -67,7 +67,7 @@ jobs:
       #     echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
       - name: output Kubernetes deployment    
         run: |
-          cat $HOME/.kube/config
+          echo cat $HOME/.kube/config
           
       - name: Apply Kubernetes deployment
         run: |
