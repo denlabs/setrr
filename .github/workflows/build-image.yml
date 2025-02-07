@@ -86,7 +86,7 @@ jobs:
       - name: Apply Kubernetes deployment
         run: |
            kubectl config use-context do-tor1-faith-no-more-v1  
-           kubectl apply -f ./setrr/k8s/deployment.yaml --validate=false
+           kubectl apply -f build.gradle --validate=false
         # kubectl apply -f ${{ github.workspace }}/k8s/deployment.yaml --validate=false
           
       # - name: Get Kubeconfig Contexts
