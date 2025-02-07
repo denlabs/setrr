@@ -96,6 +96,9 @@ jobs:
           export KUBECONFIG=kubeconfig.yaml
           mkdir $HOME/.kube
           cp kubeconfig.yaml $HOME/.kube/config
+          
+      - name: List workspace contents
+        run: ls -al ${{ github.workspace }}
         
       # - name: Set Kubernetes context
       #   run: |
@@ -112,7 +115,7 @@ jobs:
       - name: Apply Kubernetes deployment
         run: |
            kubectl config use-context do-tor1-faith-no-more-v1  
-           kubectl apply -f ${{ runner.workspace }}/k8s/deployment.yaml --validate=false
+           kubectl apply -f ${{ github.workspace }}/k8s/deployment.yaml --validate=false
         # kubectl apply -f ${{ github.workspace }}/k8s/deployment.yaml --validate=false
           
       # - name: Get Kubeconfig Contexts
