@@ -10,8 +10,15 @@ public class LeadRouteCreateCmdHandler implements RequestHandler<LeadRouteCreate
 
     private LeadRouteRepository lrp;
 
+//    private KafkaTemplate kafkaTemplate;
+
     @Override
     public LeadRouteDto handle(final LeadRouteCreateCmd command) {
-        return lrp.save(LeadRoute.createLeadRoute(command)).andConvert();
+        final var leadRoute = lrp.save(LeadRoute.createLeadRoute(command));
+
+        // tood pass events via kafka;
+//        kafkaTemplate.send("my-topic", leadRoute.toString());
+
+        return leadRoute.toDto();
     }
 }

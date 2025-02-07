@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -27,6 +28,11 @@ public class LeadRoutesController {
     @PostMapping("/leads/")
     public ResponseEntity<LeadRouteDto> save(@RequestBody LeadRouteCreateCmd cmd) {
         return ResponseEntity.ok(mediator.send(cmd));
+    }
+
+    @PostMapping("/leads/load")
+    public ResponseEntity<List<LeadRouteDto>> load() {
+        return ResponseEntity.ok(mediator.send(new LeadRouteBulkCreateCmd()));
     }
 
 }

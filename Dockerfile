@@ -2,7 +2,7 @@
 FROM openjdk:21-jdk-slim
 
 # The application's jar file
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=build/libs/setrr-*.jar
 
 # Add the application's jar to the container
 ADD ${JAR_FILE} app.jar

@@ -5,14 +5,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "routes")
-public class LeadRoute {
+public class LeadRoute extends DomainEntity<LeadRoute>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +42,18 @@ public class LeadRoute {
                 .build();
     }
 
-    public LeadRouteDto andConvert() {
+    public static LeadRoute create(final String[] array) {
+        // id,setterName,proposedGrade,anchorName,setType
+        return LeadRoute.builder()
+                .id(Long.parseLong(array[0]))
+                .setterName(array[1])
+                .proposedGrade(array[2])
+                .anchorName(array[3])
+                .setType(array[4])
+                .build();
+    }
+
+    public  LeadRouteDto toDto() {
         return LeadRouteDto.builder()
                 .id(id)
                 .setterName(setterName)
