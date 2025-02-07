@@ -68,4 +68,5 @@ jobs:
           
       - name: Apply Kubernetes deployment
         run: |
+          kubectl config use-context do-tor1-faith-no-more-v1
           kubectl apply -f k8s/deployment.yaml --validate=false
