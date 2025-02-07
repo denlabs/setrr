@@ -83,14 +83,27 @@ jobs:
         id: step_one
         run: |
           {
-            echo 'CONTEXTS<<EOF'
+            echo 'CONTEXTS<<EOL'
             kubectl config get-contexts
-            echo EOF
+            echo EOL
           } >> "$GITHUB_ENV"
       # - name: Apply Kubernetes deployment
       #   run: kubectl config use-context do-tor1-faith-no-more-v1
     #      # kubectl config get-contexts
           
     #      # kubectl apply -f k8s/deployment.yaml --validate=false
+     
+          
+      - name: Get Kubeconfig Contexts
+        run: |
+          CONTEXTS1=$(kubectl config get-contexts)
+          echo "$CONTEXTS1"
+          echo "CONTEXTS1<<EOF" >> $GITHUB_ENV
+          echo "$CONTEXTS1" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          
       - name: Output Var
-        run: echo ${{ env.CONTEXTS }}
+        run: | 
+          echo ${{ env.CONTEXTS }}
+          echo "SOMETHING ELSE"
+          echo ${{ env.CONTEXTS1 }}
