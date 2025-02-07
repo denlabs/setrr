@@ -65,7 +65,8 @@ jobs:
           
       - name: Configure Kubernetes credentials
         run: |
-          echo "$KUBE_CONFIG" > kubeconfig.yaml
+          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+          cat kubeconfig.yaml
           export KUBECONFIG=kubeconfig.yaml
           mkdir $HOME/.kube
           cp kubeconfig.yaml $HOME/.kube/config
@@ -74,36 +75,29 @@ jobs:
       #   run: |
       #     echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
-      #   Just for testing 
-      # - name: output Kubernetes deployment    
+      # - name: Echo Contexts
+      #   id: step_one
       #   run: |
-      #     echo "$(cat $HOME/.kube/config)"
-
-      - name: Echo Contexts
-        id: step_one
+      #     {
+      #       echo 'CONTEXTS<<EOL'
+      #       kubectl config get-contexts
+      #       echo EOL
+      #     } >> "$GITHUB_ENV"
+      - name: Apply Kubernetes deployment
         run: |
-          {
-            echo 'CONTEXTS<<EOL'
-            kubectl config get-contexts
-            echo EOL
-          } >> "$GITHUB_ENV"
-      # - name: Apply Kubernetes deployment
-      #   run: kubectl config use-context do-tor1-faith-no-more-v1
-    #      # kubectl config get-contexts
+           kubectl config use-context do-tor1-faith-no-more-v1  
+           kubectl apply -f k8s/deployment.yaml --validate=false
           
-    #      # kubectl apply -f k8s/deployment.yaml --validate=false
-     
+      # - name: Get Kubeconfig Contexts
+      #   run: |
+      #     CONTEXTS1=$(kubectl config get-contexts)
+      #     echo "$CONTEXTS1"
+      #     echo "CONTEXTS1<<EOF" >> $GITHUB_ENV
+      #     echo "$CONTEXTS1" >> $GITHUB_ENV
+      #     echo "EOF" >> $GITHUB_ENV
           
-      - name: Get Kubeconfig Contexts
-        run: |
-          CONTEXTS1=$(kubectl config get-contexts)
-          echo "$CONTEXTS1"
-          echo "CONTEXTS1<<EOF" >> $GITHUB_ENV
-          echo "$CONTEXTS1" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          
-      - name: Output Var
-        run: | 
-          echo ${{ env.CONTEXTS }}
-          echo "SOMETHING ELSE"
-          echo ${{ env.CONTEXTS1 }}
+      # - name: Output Var
+      #   run: | 
+      #     echo ${{ env.CONTEXTS }}
+      #     echo "SOMETHING ELSE"
+      #     echo ${{ env.CONTEXTS1 }}
