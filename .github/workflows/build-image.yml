@@ -83,7 +83,7 @@ jobs:
         run: |
           {
             echo 'CONTEXTS<<EOF'
-            kubectl config get contexts
+            kubectl config get-contexts
             echo EOF
           } >> "$GITHUB_ENV"
       - name: Apply Kubernetes deployment
