@@ -70,22 +70,26 @@ jobs:
           mkdir $HOME/.kube
           cp kubeconfig.yaml $HOME/.kube/config
         
-      # - name: Set Kubernetes context
-      #   run: |
-      #     echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-      - name: output Kubernetes deployment    
+      - name: Set Kubernetes context
         run: |
-          echo "$(cat $HOME/.kube/config)"
-          
-      - name: Apply Kubernetes deployment
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+
+      #   Just for testing 
+      # - name: output Kubernetes deployment    
+      #   run: |
+      #     echo "$(cat $HOME/.kube/config)"
+
+      - name: Echo Contexts
         run: |
           {
             echo 'CONTEXTS<<EOF'
             kubectl config get contexts
             echo EOF
           } >> "$GITHUB_ENV"
-          # kubectl config get-contexts
-          # kubectl config use-context do-tor1-faith-no-more-v1
-          # kubectl apply -f k8s/deployment.yaml --validate=false
+      - name: Apply Kubernetes deployment
+        run: |
+    #      # kubectl config get-contexts
+    #      # kubectl config use-context do-tor1-faith-no-more-v1
+    #      # kubectl apply -f k8s/deployment.yaml --validate=false
       - name: Output Var
         run: echo ${{ env.CONTEXTS }}
