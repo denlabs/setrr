@@ -16,6 +16,10 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+        - name: Get Worspace vars
+          run: |
+            echo ${{ github }}
+            cat ${{ github }}
     #   - name: Checkout repository
     #     uses: actions/checkout@v4
 
