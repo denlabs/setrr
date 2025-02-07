@@ -81,7 +81,7 @@ jobs:
         run: |
           {
             echo 'CONTEXTS<<EOF'
-            kubectl get contexts
+            kubectl config get contexts
             echo EOF
           } >> "$GITHUB_ENV"
           # kubectl config get-contexts
