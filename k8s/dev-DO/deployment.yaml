@@ -66,14 +66,17 @@ kind: Ingress
 metadata:
   name: setrr-ingress
   annotations:
-    #    Warning: annotation "kubernetes.io/ingress.class" is deprecated, please use 'spec.ingressClassName' instead
+    # Warning: annotation "kubernetes.io/ingress.class" is deprecated, use 'spec.ingressClassName' instead
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/backend-protocol: "TCP"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: denilab.ca #@denlabs.com
+    - host: denilab.ca
       http:
         paths:
+          # Existing web service configuration
           - pathType: Prefix
             path: "/leads"
             backend:
@@ -88,7 +91,7 @@ metadata:
   name: setrr-config
 data:
   spring_profiles_active: "dev"
-  spring_datasource_url: "jdbc:postgresql://209.38.8.198:5432/postgres?currentSchema=setrr"
+  spring_datasource_url: "jdbc:postgresql://postgres.denilab.ca/postgres?currentSchema=setrr"
   kafka_bootstrap_servers_config: "kafka-service.kafka.svc.cluster.local:9092"
   kafka_group_id_config: "setrr-k-group"
 ---
@@ -98,5 +101,6 @@ metadata:
   name: setrr-db-secret
 type: Opaque
 data:
-  spring_datasource_username: c2V0cnI=  # base64 encoded 'setrr'
-  spring_datasource_password: c3RpY2t5bm90ZTU0MzI=  # base64 encoded 'stickynote5432'
+  spring_datasource_username: c2V0cnI=
+  spring_datasource_password: c3RpY2t5bm90ZTU0MzI=
+
