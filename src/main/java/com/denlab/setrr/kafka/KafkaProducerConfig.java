@@ -14,13 +14,13 @@ import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 
-//@Configuration
+@Configuration
 public class KafkaProducerConfig {
 
-//    @Value("${env.kafka.bootstrap.servers.config:kafka-service.kafka.svc.cluster.local:9092}")
-private String bootstrapServersConfig = "kafka-service.kafka.svc.cluster.local:9092";
+    @Value("${env.kafka.bootstrap.servers.config:kafka-service.kafka.svc.cluster.local:9092}")
+    private String bootstrapServersConfig = "kafka-service.kafka.svc.cluster.local:9092";
 
-//    @Bean
+    @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, requireNonNull(bootstrapServersConfig));
@@ -29,7 +29,7 @@ private String bootstrapServersConfig = "kafka-service.kafka.svc.cluster.local:9
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
-//    @Bean
+    @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }

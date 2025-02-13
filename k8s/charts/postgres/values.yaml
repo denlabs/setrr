@@ -1,0 +1,30 @@
+global:
+  postgresql:
+    auth:
+      username: "postgres"
+      password: "born1975Feb28"
+      database: "postgres"
+
+architecture: replication  # Enables High Availability (Primary + Replicas)
+
+primary:
+  persistence:
+    enabled: true
+    size: 10Gi  # Adjust based on your needs
+  service:
+    type: ClusterIP  # Keeps the service internal (Ingress handles external access)
+    port: 5432
+
+#readReplicas:
+#  enabled: true
+#  replicaCount: 2  # Number of read replicas
+#
+#metrics:
+#  enabled: true  # Enable if you want Prometheus monitoring
+#
+#networkPolicy:
+#  enabled: false  # Set to true if you want to restrict access within the cluster
+
+
+#  kubectl port-forward --namespace default svc/postgres-postgresql-primary 5432:5432 &
+#  PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d born1975Feb28 -p 5432

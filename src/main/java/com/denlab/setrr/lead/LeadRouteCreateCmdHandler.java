@@ -2,6 +2,7 @@ package com.denlab.setrr.lead;
 
 import com.denlab.setrr.mediator.RequestHandler;
 import lombok.AllArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
@@ -10,14 +11,14 @@ public class LeadRouteCreateCmdHandler implements RequestHandler<LeadRouteCreate
 
     private LeadRouteRepository lrp;
 
-//    private KafkaTemplate kafkaTemplate;
+    private KafkaTemplate kafkaTemplate;
 
     @Override
     public LeadRouteDto handle(final LeadRouteCreateCmd command) {
         final var leadRoute = lrp.save(LeadRoute.createLeadRoute(command));
 
         // tood pass events via kafka;
-//        kafkaTemplate.send("my-topic", leadRoute.toString());
+        kafkaTemplate.send("my-topic", leadRoute.toString());
 
         return leadRoute.toDto();
     }

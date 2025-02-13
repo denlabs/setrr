@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: setrr
-          image: localhost:5001/denislabelle/setrr:0.0.12
+          image: localhost:5001/denislabelle/setrr:0.0.18
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -68,7 +69,8 @@ metadata:
 data:
   app.host: "denlab.com" # TODO need Kustomize or HELM to expose these vars to Ingress
   spring_profiles_active: "localhost" # default?
-  spring_datasource_url: "jdbc:postgresql://postgres.denlab.com/postgres?currentSchema=setrr"
+#  spring_datasource_url: "jdbc:postgresql://postgres.denlab.com/postgres?currentSchema=setrr"
+  spring_datasource_url: "jdbc:postgresql://postgres:5432/postgres?currentSchema=setrr"
   kafka_bootstrap_servers_config: "kafka-service.kafka.svc.cluster.local:9092"
   kafka_group_id_config: "setrr-k-group"
 ---

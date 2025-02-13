@@ -1,15 +1,16 @@
 package com.denlab.setrr.kafka;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class MessageProducer {
-//    private KafkaTemplate<String, String> kafkaTemplate;
-//
-//    public void sendMessage(String topic, String message) {
-//        kafkaTemplate.send(topic, message);
-//    }
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    public void sendMessage(String topic, String message) {
+        kafkaTemplate.send(topic, message);
+    }
 
 }

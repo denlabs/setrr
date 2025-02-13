@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SetrrApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SetrrApplication.class, args);
+		SpringApplication app = new SpringApplication(SetrrApplication.class);
+		app.addInitializers(new EarlyEnvPrinter());
+		app.run(args);
 	}
 
 }
